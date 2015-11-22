@@ -29,11 +29,11 @@ gradle -q shell:shell
 
 You will see an output that the NamingShell has started.
 
-Now you can examing your Context.
+Now you can examine your Context.
 ```bash
-initctx
+initctx console/src/main/resources/.jndiEnv
 list
 list VERSION
 cd VERSION
-listattrs VERSION
+listattrs
 ```
