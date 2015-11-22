@@ -22,6 +22,8 @@ gradle build
 Run the shell by using java
 ```gradle
 gradle installDist
+gradle -q console:shell
+or
 gradle -q shell:shell
 ```
 
