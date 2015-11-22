@@ -14,3 +14,24 @@ There are many helpfull resources on the web, some are listed here:
 - http://docs.oracle.com/javase/jndi/tutorial/basics/naming/list.html
 - http://docstore.mik.ua/orelly/java-ent/jenut/ch06_02.htm
 
+# Build the project by running gradle build from the root of the project.
+```gradle
+gradle build
+```
+
+Run the shell by using java
+```gradle
+gradle installDist
+gradle -q shell:shell
+```
+
+You will see an output that the NamingShell has started.
+
+Now you can examing your Context.
+```bash
+initctx
+list
+list VERSION
+cd VERSION
+listattrs VERSION
+```

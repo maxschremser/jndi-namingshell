@@ -1,3 +1,5 @@
+package com.schremser.jndi.console;
+
 /*
  * This example is from the book "Java Enterprise in a Nutshell".
  * Copyright (c) 1999 by O'Reilly & Associates.
@@ -7,8 +9,11 @@
  * WITHOUT WARRANTY of any kind either expressed or implied.
  */
 
-rootProject.name = 'jndi'
+import javax.naming.Context;
+import java.util.Vector;
 
-include "shell"
-include 'console'
-
+public interface Command {
+    public void execute(Context c, Vector v)
+            throws CommandException;
+    public String help();
+}

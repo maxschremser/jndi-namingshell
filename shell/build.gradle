@@ -7,7 +7,7 @@
  * WITHOUT WARRANTY of any kind either expressed or implied.
  */
 
-group 'com.schremser.jmsbinding'
+group 'com.schremser.jndi.shell'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -15,22 +15,46 @@ repositories {
 }
 
 apply plugin: 'idea'
-apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'application'
 
-mainClassName = "com.schremser.jndi.NamingShell"
+mainClassName = 'com.schremser.jndi.shell.Main'
 
 dependencies {
-    // Loggging frameworks
-    compile 'commons-io:commons-io:2.4'
-    compile 'log4j:log4j:1.2.7'
-    compile 'org.slf4j:slf4j-log4j12:+'
-
     compile 'org.glassfish.mq:imq:5.1'
-    // compile 'com.sun.jndi:fscontext:1.2-beta-3'
     compile 'com.sun.messaging.mq:fscontext:4.+'
+    compile 'commons-cli:commons-cli:1.2'
+    compile('jline:jline:2.11') {
+        exclude(group: 'junit', module: 'junit')
+    }
 
+    compile 'org.codehaus.groovy:groovy-groovysh:2.2.+'
 
     // Test Classes
     testCompile 'junit:junit:4.11'
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/main/resources'
+            include '**/*.properties', '**/*.xml'
+            output.resourcesDir = 'build/classes/main'
+        }
+    }
+}
+
+/**
+ * To run the shell task, first install it
+ * gradle installDist
+ *
+ * then run the app
+ * gradle -q shell
+ */
+task(shell, dependsOn: 'classes', type: JavaExec) {
+    main ='com.schremser.jndi.shell.Main'
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    standardOutput = System.out
+    jvmArgs = ['-Dgroovysh.prompt="jndi"']
 }

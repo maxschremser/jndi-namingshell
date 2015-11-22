@@ -1,3 +1,4 @@
+package com.schremser.jndi.console;
 /*
  * This example is from the book "Java Enterprise in a Nutshell".
  * Copyright (c) 1999 by O'Reilly & Associates.
@@ -7,8 +8,13 @@
  * WITHOUT WARRANTY of any kind either expressed or implied.
  */
 
-rootProject.name = 'jndi'
-
-include "shell"
-include 'console'
-
+public class CommandException extends Exception {
+    Exception e; // root exception
+    CommandException(Exception e, String message) {
+        super(message);
+        this.e = e;
+    }
+    public Exception getRootException() {
+        return e;
+    }
+}
