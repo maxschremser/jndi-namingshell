@@ -1,2 +1,1 @@
-java.naming.factory.initial=com.sun.jndi.fscontext.RefFSContextFactory
-java.naming.provider.url=file:./jndi/openmq
+.jndienv
