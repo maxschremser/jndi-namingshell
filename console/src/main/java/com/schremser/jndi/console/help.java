@@ -32,7 +32,7 @@ public class help implements Command {
                 try {
                     Class commandInterface = Class.forName("com.schremser.jndi.console.Command");
                     String currentCommand = clazz.getName().replace(".class", "");
-                    Class commandClass = Class.forName("com.schremser.jndi." + currentCommand);
+                    Class commandClass = Class.forName("com.schremser.jndi.console." + currentCommand);
 
                     if (!commandClass.equals(commandInterface) && commandInterface.isAssignableFrom(commandClass)) {
                         Command theCommand = (Command) commandClass.newInstance();

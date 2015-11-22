@@ -1,0 +1,13 @@
+#This file is used by the JNDI FSContext.
+#Sun Nov 22 12:01:25 CET 2015
+version/RefAddr/1/Encoding=String
+version/ClassName=com.schremser.jndi.Version
+version/RefAddr/2/Encoding=String
+version/RefAddr/2/Content=20151122
+version/RefAddr/1/Type=minor
+version/RefAddr/0/Content=1
+version/FactoryName=com.schremser.jndi.VersionFactory
+version/RefAddr/2/Type=buildDate
+version/RefAddr/0/Encoding=String
+version/RefAddr/0/Type=major
+version/RefAddr/1/Content=0
