@@ -1,0 +1,36 @@
+/*
+ * This example is from the book "Java Enterprise in a Nutshell".
+ * Copyright (c) 1999 by O'Reilly & Associates.
+ * You may distribute this source code for non-commercial purposes only.
+ * You may study, modify, and use this example for any purpose, as long as
+ * this notice is retained.  Note that this example is provided "as is",
+ * WITHOUT WARRANTY of any kind either expressed or implied.
+ */
+
+group 'com.schremser.jmsbinding'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "com.schremser.jndi.NamingShell"
+
+dependencies {
+    // Loggging frameworks
+    compile 'commons-io:commons-io:2.4'
+    compile 'log4j:log4j:1.2.7'
+    compile 'org.slf4j:slf4j-log4j12:+'
+
+    compile 'org.glassfish.mq:imq:5.1'
+    // compile 'com.sun.jndi:fscontext:1.2-beta-3'
+    compile 'com.sun.messaging.mq:fscontext:4.+'
+
+
+    // Test Classes
+    testCompile 'junit:junit:4.11'
+}
