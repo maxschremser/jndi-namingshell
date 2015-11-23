@@ -13,6 +13,8 @@
 <commands>
 
     <command>com.schremser.jndi.shell.commands.InitCtxCommand</command>
+    <command>com.schremser.jndi.shell.commands.CdCommand</command>
+    <command>com.schremser.jndi.shell.commands.ListCommand</command>
 
 </commands>
 

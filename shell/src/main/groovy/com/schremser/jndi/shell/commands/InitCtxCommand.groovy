@@ -34,18 +34,8 @@ class InitCtxCommand
         extends CommandSupport
 {
 
-    def JNDIPROPS_FILENAME  = ".jndienv";
-    def PROMPT = "[no initial context]";
-    def VERSION = "1.0";
-    def CURRENT_CONTEXT, INITIAL_CONTEXT;
-    def CURRENT_NAME, INITIAL_NAME;
-
-    def getDefaultContext() {
-        return JNDIPROPS_FILENAME
-    }
-
     InitCtxCommand(final Groovysh shell) {
-        super(shell, 'initctx', '\\ic')
+        super(shell, 'initctx', 'ic')
     }
 
     protected List createCompleters() {
@@ -55,7 +45,7 @@ class InitCtxCommand
     Object execute(final List<String> args) {
         assert args != null
 
-        def source = args[0]?:((Namingsh)shell).JNDIPROPS_FILENAME
+        def source = args[0]?:((Namingsh)shell).getDefaultJndiProps()
 
         if (io.verbose) {
             io.out.printf(messages['info.jndi'], source)
@@ -87,19 +77,21 @@ class InitCtxCommand
             File jndiProps = new File(url.file);
             props.load(new FileInputStream(jndiProps));
             Context ctx = new InitialContext(props);
-            ((Namingsh)shell).INITIAL_CONTEXT = ctx
-            ((Namingsh)shell).setPrompt("InitialContext")
+            ((Namingsh)shell).setInitialContext(ctx)
+            ((Namingsh)shell).setCurrentContext(ctx)
+            ((Namingsh)shell).setInitialName("/")
+            ((Namingsh)shell).setCurrentName("/")
         }
         catch (NamingException ne) {
             System.out.println("Couldn't create the initial context");
         }
         catch (FileNotFoundException fnfe) {
             System.out.print("Couldn't find properties file: ");
-            System.out.println(jndiPropsFilename);
+            System.out.println(url);
         }
         catch (IOException ioe) {
             System.out.print("Problem loading the properties file: ");
-            System.out.println(jndiPropsFilename);
+            System.out.println(url);
         }
         catch (Exception e) {
             System.out.println("There was a problem starting the shell");
