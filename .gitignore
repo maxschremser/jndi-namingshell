@@ -2,6 +2,7 @@
 .gradle
 .idea
 out
-jndi.iml
-jndi.ipr
-jndi.iws
+**/build
+**/*.iml
+**/*.ipr
+**/*.iws

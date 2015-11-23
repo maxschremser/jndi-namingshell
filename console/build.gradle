@@ -1,6 +1,7 @@
 group 'com.schremser.jndi.shell'
 version '1.0-SNAPSHOT'
 
+apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'application'
 
