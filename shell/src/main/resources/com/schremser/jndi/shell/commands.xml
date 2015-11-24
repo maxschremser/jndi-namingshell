@@ -18,6 +18,7 @@
     <command>com.schremser.jndi.shell.commands.ListAttrsCommand</command>
     <command>com.schremser.jndi.shell.commands.CreateCommand</command>
     <command>com.schremser.jndi.shell.commands.AttrCommand</command>
+    <command>com.schremser.jndi.shell.commands.PwdCommand</command>
 
 </commands>
 
