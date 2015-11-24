@@ -36,4 +36,8 @@ list
 list VERSION
 cd VERSION
 listattrs
+cd /
+create DB
+cd DB
+attr jdbc oracle:thin 1521 orainst
 ```

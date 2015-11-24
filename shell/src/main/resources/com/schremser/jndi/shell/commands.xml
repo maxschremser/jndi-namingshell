@@ -15,6 +15,9 @@
     <command>com.schremser.jndi.shell.commands.InitCtxCommand</command>
     <command>com.schremser.jndi.shell.commands.CdCommand</command>
     <command>com.schremser.jndi.shell.commands.ListCommand</command>
+    <command>com.schremser.jndi.shell.commands.ListAttrsCommand</command>
+    <command>com.schremser.jndi.shell.commands.CreateCommand</command>
+    <command>com.schremser.jndi.shell.commands.AttrCommand</command>
 
 </commands>
 

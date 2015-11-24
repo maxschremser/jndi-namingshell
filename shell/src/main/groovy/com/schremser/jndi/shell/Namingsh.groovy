@@ -101,7 +101,7 @@ class Namingsh extends Groovysh {
 
     @Override
     String renderPrompt() {
-        return prompt.render(getDefaultPrompt())
+        return prompt.render("@|bold ${getDefaultPrompt()}|@> ")
     }
 
     final Closure defaultErrorHook = { Throwable cause ->

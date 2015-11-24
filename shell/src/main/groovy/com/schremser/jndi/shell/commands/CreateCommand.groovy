@@ -10,22 +10,22 @@
 package com.schremser.jndi.shell.commands
 
 import com.schremser.jndi.shell.Namingsh
-import jline.console.completer.FileNameCompleter
 import org.codehaus.groovy.tools.shell.CommandSupport
 import org.codehaus.groovy.tools.shell.Groovysh
 
 import javax.naming.Context
 import javax.naming.NamingException
+import javax.naming.NoPermissionException
 
 /**
- * The 'cd' command.
+ * The 'create' command.
  */
-class CdCommand
+class CreateCommand
         extends CommandSupport
 {
 
-    CdCommand(final Groovysh shell) {
-        super(shell, 'cd', '\\cd')
+    CreateCommand(final Groovysh shell) {
+        super(shell, 'create', 'c')
     }
 
     /*
@@ -42,30 +42,21 @@ class CdCommand
         if (((Namingsh) shell).getCurrentContext() == null)
             fail(messages.format('error.no_current_context', args.join(' ')))
 
-        cd(args[0])
+        create(args[0])
     }
 
-    private void cd(final String name) {
+    private void create(final String name) {
         assert name
 
         try {
-            if (((name.equals("/")) || (name.equals("\\")))) {
-                ((Namingsh) shell).setCurrentContext(((Namingsh) shell).getInitialContext());
-                ((Namingsh) shell).setCurrentName(((Namingsh) shell).getInitialName());
-                println(messages.format('command.current_context', name))
-            }
-            else {
-                Context c = (Context) (((Namingsh) shell).getCurrentContext()).lookup(name);
-                ((Namingsh) shell).setCurrentContext(c);
-                ((Namingsh) shell).setCurrentName(name);
-                println(messages.format('command.current_context', name))
-            }
+            ((Namingsh) shell).getCurrentContext().createSubcontext(name);
+            println(messages.format('info.create', name))
+        }
+        catch (NoPermissionException npe) {
+            fail(messages.format('error.no_permission', name))
         }
         catch (NamingException ne) {
-            fail(messages.format('error.cannot_change_context', name))
-        }
-        catch (ClassCastException cce) {
-            fail(messages.format('error.not_a_context', name))
+            fail(messages.format('error.create', name))
         }
     }
 }
