@@ -38,9 +38,10 @@ class InitCtxCommand
         super(shell, 'initctx', 'ic')
     }
 
+    /*
     protected List createCompleters() {
         return [ new FileNameCompleter() ]
-    }
+    }*/
 
     Object execute(final List<String> args) {
         assert args != null

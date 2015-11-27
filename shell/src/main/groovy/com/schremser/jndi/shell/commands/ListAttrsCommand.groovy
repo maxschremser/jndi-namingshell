@@ -12,6 +12,7 @@ package com.schremser.jndi.shell.commands
 import com.schremser.jndi.shell.Namingsh
 import org.codehaus.groovy.tools.shell.CommandSupport
 import org.codehaus.groovy.tools.shell.Groovysh
+import org.codehaus.groovy.tools.shell.completion.FileNameCompleter
 
 import javax.naming.Context
 import javax.naming.NameClassPair
@@ -29,15 +30,15 @@ class ListAttrsCommand
         super(shell, 'listattrs', 'la')
     }
 
-    /*
+
     protected List createCompleters() {
         return [ new FileNameCompleter() ]
     }
-    */
+
 
     Object execute(final List<String> args) {
         if (((Namingsh) shell).getCurrentContext() == null)
-            fail(messages.format('error.no_current_context', args.join(' ')))
+            fail(messages.format('error.no_current_context'))
 
         listattrs(args[0]?:"")
     }
@@ -46,15 +47,14 @@ class ListAttrsCommand
         // An empty string is OK for a listattrs operation
         // as it means list attributes of the current context
 
-        if (((Namingsh) shell).getCurrentContext() == null)
-            fail(messages.format('error.no_current_context', name))
-
         try {
             NamingEnumeration enumeration = ((Namingsh) shell).getCurrentContext().list(name);
             while (enumeration.hasMore()) {
-                NameClassPair ncPair = (NameClassPair)enumeration.next();
-                Object obj = ((Namingsh) shell).getCurrentContext().lookup(ncPair.getName());
-                println(messages.format("info.listattrs", ncPair.getName(), obj))
+                try {
+                    NameClassPair ncPair = (NameClassPair)enumeration.next();
+                    Object obj = ((Namingsh) shell).getCurrentContext().lookup(ncPair.getName());
+                    println(messages.format("info.listattrs", ncPair.getName(), obj))
+                } catch (Exception ignore) {}
             }
         }
         catch (NamingException e) {

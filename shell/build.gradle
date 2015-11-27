@@ -38,7 +38,7 @@ sourceSets {
     main {
         resources {
             srcDir 'src/main/resources'
-            include '**/*.properties', '**/*.xml'
+            include '**/*.properties', '**/*.xml', '**/.jndienv'
             output.resourcesDir = 'build/classes/main'
         }
     }
@@ -52,9 +52,9 @@ sourceSets {
  * gradle -q shell
  */
 task(shell, dependsOn: 'classes', type: JavaExec) {
-    main ='com.schremser.jndi.shell.Main'
-    classpath = sourceSets.main.runtimeClasspath
+    main = mainClassName
+    classpath = files(sourceSets.main.runtimeClasspath, ".")
     standardInput = System.in
     standardOutput = System.out
-    jvmArgs = ['-Dgroovysh.prompt="jndi"']
+    jvmArgs = ['-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006']
 }
